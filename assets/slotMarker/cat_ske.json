@@ -1,0 +1,1 @@
+{"frameRate":24,"name":"cat","version":"5.5","compatibleVersion":"5.5","armature":[{"type":"Armature","frameRate":24,"name":"Armature","aabb":{"x":-40,"y":-40,"width":80,"height":80},"bone":[{"name":"root"}],"slot":[{"name":"cat","parent":"root"}],"skin":[{"slot":[{"name":"cat","display":[{"name":"cat"}]}]}],"defaultActions":[{}]}]}
