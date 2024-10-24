@@ -48,16 +48,37 @@ export default class SlotList extends cc.Component {
             return;
         }
 
+        let animateBones = Object.keys(animationData.boneTimelines);
+        cc.log("animateBones", animateBones);
+
+        let slots = [];
+        for (let boneName of animateBones) {
+            let boneData = armatureData.getBone(boneName);
+            for (let k in armatureData.slots) {
+                let slot = armatureData.getSlot(k);
+                if (slot.parent.hashCode == boneData.hashCode) {
+                    slots.push(slot.name);
+                }
+            }
+        }
+
         let animateSlots = Object.keys(animationData.slotTimelines);
         cc.log("animateSlots", animateSlots);
 
+        for (let slotName of animateSlots) {
+            if (slots.indexOf(slotName) < 0) {
+                slots.push(slotName);
+            }
+        }
+        cc.log("slots", slots);
+
         let maxCount = Math.max(
-            animateSlots.length,
+            slots.length,
             this.layout.node.childrenCount
         );
         for (let i = 0; i < maxCount; i++) {
-            if (i < animateSlots.length) {
-                let dbName = animateSlots[i];
+            if (i < slots.length) {
+                let dbName = slots[i];
                 let cell = this.layout.node.children[i];
                 if (!cell) {
                     cell = cc.instantiate(this.cellPrefab.node);
